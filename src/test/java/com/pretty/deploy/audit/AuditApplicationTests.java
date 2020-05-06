@@ -21,7 +21,7 @@ class AuditApplicationTests {
 
     @Test
     void contextLoads() {
-        log.info("dddddddddddddddddd");
+        log.info("dddddddddddddddddgd");
         QueryWrapper wrapper = new QueryWrapper();
         if (workOrderMapper == null){
             log.info("nulllllllll");
