@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pretty.deploy.audit.mapper.WorkOrderMapper">
+  <resultMap id="BaseResultMap" type="com.pretty.deploy.audit.entity.WorkOrder">
+    <!--@mbg.generated-->
+    <!--@Table TF_DEPLOY_AUDIT_WORK_ORDER-->
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="WORK_ORDER_NUMBER" jdbcType="VARCHAR" property="workOrderNumber" />
+    <result column="WORK_ORDER_NAME" jdbcType="VARCHAR" property="workOrderName" />
+    <result column="DEVELOPER" jdbcType="VARCHAR" property="developer" />
+    <result column="PRINCIPAL" jdbcType="VARCHAR" property="principal" />
+    <result column="CHAN" jdbcType="VARCHAR" property="chan" />
+    <result column="URGENT_VERSION" jdbcType="VARCHAR" property="urgentVersion" />
+    <result column="TEST_SITUATION" jdbcType="VARCHAR" property="testSituation" />
+    <result column="RISK_ASSESSMENT" jdbcType="VARCHAR" property="riskAssessment" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="ONLINE_DATE" jdbcType="DATE" property="onlineDate" />
+    <result column="SUBMIT_AUDIT_TIME" jdbcType="TIMESTAMP" property="submitAuditTime" />
+    <result column="END_AUDIT_TIME" jdbcType="TIMESTAMP" property="endAuditTime" />
+    <result column="END_ONLINE_TIME" jdbcType="TIMESTAMP" property="endOnlineTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, WORK_ORDER_NUMBER, WORK_ORDER_NAME, DEVELOPER, PRINCIPAL, CHAN, URGENT_VERSION, 
+    TEST_SITUATION, RISK_ASSESSMENT, REMARK, ONLINE_DATE, SUBMIT_AUDIT_TIME, END_AUDIT_TIME, 
+    END_ONLINE_TIME, CREATE_TIME
+  </sql>
+</mapper>
