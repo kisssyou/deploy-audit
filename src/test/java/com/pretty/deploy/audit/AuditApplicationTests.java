@@ -21,11 +21,7 @@ class AuditApplicationTests {
 
     @Test
     void contextLoads() {
-        log.info("dddddddddddddddddgd");
         QueryWrapper wrapper = new QueryWrapper();
-        if (workOrderMapper == null){
-            log.info("nulllllllll");
-        }
         WorkOrder workOrders = workOrderMapper.selectOne(wrapper);
         log.info("workOrders:{}", JSON.toJSONString(workOrders));
 
