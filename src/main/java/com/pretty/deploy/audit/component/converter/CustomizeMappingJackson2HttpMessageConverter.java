@@ -2,6 +2,7 @@ package com.pretty.deploy.audit.component.converter;
 
 import com.pretty.deploy.audit.component.converter.wraper.ResponseWrapper;
 import com.pretty.deploy.audit.component.exception.ExceptionInfo;
+import com.pretty.deploy.audit.entity.JsonDataResult;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -24,7 +25,9 @@ public class CustomizeMappingJackson2HttpMessageConverter extends MappingJackson
             if (object instanceof ExceptionInfo) {
                 ExceptionInfo exceptionInfo = (ExceptionInfo)object;
                 object = this.responseWrapper.wrapException(exceptionInfo);
-            } else {
+            } else if (object instanceof JsonDataResult){
+                //如果直接返回的就是JsonDataResult 不做任何包装处理
+            }else {
                 object = this.responseWrapper.wrapData(object);
             }
         }
