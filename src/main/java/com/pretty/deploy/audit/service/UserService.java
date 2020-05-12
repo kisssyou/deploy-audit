@@ -15,5 +15,9 @@ import com.pretty.deploy.audit.entity.User;
 
 public interface UserService extends IService<User> {
 
-    public IPage<User> selectUserPage(Page<User> page, QueryWrapper<User> queryWrapper);
+     IPage<User> selectUserPage(Page<User> page, QueryWrapper<User> queryWrapper);
+
+     int updateUser(User user);
+
+
 }

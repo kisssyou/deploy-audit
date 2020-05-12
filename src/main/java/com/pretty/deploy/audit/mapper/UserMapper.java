@@ -25,4 +25,10 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 分页对象
      */
     IPage<User> selectPageVo(Page<?> page, @Param("ew") QueryWrapper<User> queryWrapper);
+
+    /**
+     * 修改用户信息
+     * @param user
+     */
+    int updateUser(@Param("userInfo") User user);
 }

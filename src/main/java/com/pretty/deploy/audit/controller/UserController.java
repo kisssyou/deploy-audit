@@ -6,13 +6,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pretty.deploy.audit.entity.User;
 import com.pretty.deploy.audit.service.UserService;
+import com.pretty.deploy.audit.utils.Asserts;
 import com.pretty.deploy.audit.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Author:Tanht
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -53,24 +52,20 @@ public class UserController {
      */
     @RequestMapping(value = "login")
     @ResponseBody
-    public JSONObject login(@RequestBody User user){
+    public User login(@RequestBody User user){
         JSONObject resultJson = new JSONObject();
         //获得加密后密码
         String password = MD5Utils.getPwd(user.getPassword()+PASSWORD_SALT);
-        User currentUser = userService.getById(user.getId());
-        if(currentUser == null){
-            resultJson.put("respCode","-100");
-            resultJson.put("respMsg","不存在该用户！");
-            return resultJson;
-        }
-        if(!currentUser.getPassword().equals(password)){
-            resultJson.put("respCode","-200");
-            resultJson.put("respMsg","用户名或密码错误！");
-            return resultJson;
-        }
-        resultJson.put("respCode","100");
-        resultJson.put("respMsg","登录成功！");
-        return resultJson;
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("USER_NAME",user.getUserName());
+        User currentUser = userService.getOne(queryWrapper);
+        //判断是否存在该用户
+        Asserts.isNull(currentUser, "1000");
+        //判断密码是否正确
+        Asserts.isNotEquals(currentUser.getPassword(),password,"1001");
+//        resultJson.put("respCode","0000");
+//        resultJson.put("respMsg","登录成功！");
+        return currentUser;
     }
 
     /**
@@ -81,12 +76,13 @@ public class UserController {
     @RequestMapping(value = "updateUser")
     @ResponseBody
     public JSONObject updateUserInfo(@RequestBody User user){
-        //获得原密码
-        String password = user.getPassword();
-        //密码加密
-        user.setPassword(MD5Utils.getPwd(password+PASSWORD_SALT));
-        boolean updateResult = userService.updateById(user);
+//        //获得原密码
+//        String password = user.getPassword();
+//        //密码加密
+//        user.setPassword(MD5Utils.getPwd(password+PASSWORD_SALT));
+        int result = userService.updateUser(user);
         JSONObject resultJson = new JSONObject();
+        boolean updateResult = result >= 1 ? true : false;
         if(!updateResult){
             resultJson.put("respCode","-100");
             resultJson.put("respMsg","修改用户信息失败");

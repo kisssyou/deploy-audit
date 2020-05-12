@@ -19,4 +19,26 @@
     </where>
 </select>
 
+ <update id="updateUser" parameterType="com.pretty.deploy.audit.entity.User">
+   update TF_DEPLOY_AUDIT_USER
+   <set>
+     <if test="userInfo.telNum != null">
+       TEL_NUM = #{userInfo.telNum,jdbcType=VARCHAR},
+     </if>
+     <if test="userInfo.nickName != null">
+       NICK_NAME = #{userInfo.nickName,jdbcType=TIMESTAMP},
+     </if>
+     <if test="userInfo.userName != null">
+       USER_NAME = #{userInfo.userName,jdbcType=VARCHAR},
+     </if>
+     <if test="userInfo.roleStr != null">
+       ROLE_STR = #{userInfo.roleStr,jdbcType=VARCHAR},
+     </if>
+     <if test="userInfo.email != null">
+       EMAIL = #{userInfo.email,jdbcType=VARCHAR},
+     </if>
+   </set>
+   where ID = #{userInfo.id}
+ </update>
+
 </mapper>

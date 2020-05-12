@@ -30,4 +30,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 要点!! 分页返回的对象与传入的对象是同一个
         return userMapper.selectPageVo(page, queryWrapper);
     }
+
+    public int updateUser(User user){
+        return userMapper.updateUser(user);
+    }
 }
